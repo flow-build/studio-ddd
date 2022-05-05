@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { routes as ExampleRoutes } from "./domain/example";
+import { routes as SignInRoutes } from "./domain/signIn";
 import { Provider as ReduxProvider } from "react-redux";
 import { store } from "./store";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -24,7 +25,8 @@ function App() {
             <QueryClientProvider client={queryClient}>
                 <Suspense fallback={<div>loading...</div>}>
                     <Routes>
-                        <Route path="/*" element={<ExampleRoutes />} />
+                        {/* <Route path="/*" element={<ExampleRoutes />} /> */}
+                        <Route path="/*" element={<SignInRoutes />} />
                     </Routes>
                 </Suspense>
             </QueryClientProvider>
