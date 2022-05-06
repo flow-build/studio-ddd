@@ -1,29 +1,20 @@
 import { Suspense } from "react";
-import { Provider as ReduxProvider } from "react-redux";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { Provider as ReduxProvider } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+
 import { ThemeProvider } from "@mui/material/styles";
 
-import { routes as SignInRoutes } from "./domain/signIn";
 
-import { store } from "./store";
+import { queryClient } from "~/core/config/queryClient";
+import { darkTheme } from "~/core/theme/darkTheme";
+import GlobalStyle from "~/core/theme/globalStyle";
 
-import GlobalStyle from "./core/theme/globalStyle";
-import { darkTheme } from "./core/theme/darkTheme";
+import { routes as SignInRoutes } from "~/domain/signIn";
 
-const twentyFourHoursInMs = 1000 * 60 * 60 * 24;
-const queryClient = new QueryClient({
-    defaultOptions: {
-        queries: {
-            refetchOnWindowFocus: false,
-            refetchOnMount: false,
-            refetchOnReconnect: false,
-            retry: false,
-            staleTime: twentyFourHoursInMs,
-        },
-    },
-});
+import { store } from "~/store";
+
 
 function App() {
     return (
