@@ -1,22 +1,64 @@
-import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import Button from "../../components/Button";
-import { setCounter } from "../../ducks/signIn";
-import { RootState } from "../../ducks";
+import { useNavigate } from "react-router-dom";
+
+import flowbuildLogo from "../../assets/images/flowbuild-studio/default.svg";
+
+import { setStorageItem } from "../../../../core/utils/storage";
+
+import useLogin from "../../hooks/useLogin";
+
+import * as S from "./styles";
 
 const SignIn = () => {
-    const dispatch = useDispatch();
-    const counter = useSelector((store: RootState) => store.signIn.counter);
-    const [stateCounter, setStateCounter] = useState(counter);
+    const navigate = useNavigate();
+
+    const login = useLogin();
+
+    const [payload, setPayload] = useState({ email: "", password: "" });
+
+    const onChangeTextByField = (text: string, field: "email" | "password") => {
+        setPayload(prev => ({ ...prev, [field]: text }));
+    };
+
+    const onLogin = async () => {
+        const token = await login.mutateAsync();
+
+        if (token) {
+            setStorageItem("TOKEN", token);
+            navigate("/dashboard");
+        }
+    };
 
     return (
-        <div>
-            <h1>SignIn</h1>
-            <h2>State counter - {stateCounter}</h2>
-            <h2>Redux counter - {counter}</h2>
-            <Button onClick={() => setStateCounter(actualValue => actualValue + 1)}>ADD +</Button>
-            <Button onClick={() => dispatch(setCounter(stateCounter))}>Push to redux</Button>
-        </div>
+        <S.Wrapper>
+            <S.LoginContainer>
+                <S.LogoContainer>
+                    <img src={flowbuildLogo} alt="Logo" width="300px" />
+                </S.LogoContainer>
+
+                <S.Form>
+                    <S.Input
+                        id="email"
+                        label="E-mail"
+                        placeholder='Digite seu e-mail'
+                        type="email"
+                        value={payload.email}
+                        onChange={evt => onChangeTextByField(evt.target.value, "email")}
+                    />
+
+                    <S.Input
+                        id="password"
+                        label="Senha"
+                        placeholder='Digite sua senha'
+                        type="password"
+                        value={payload.password}
+                        onChange={evt => onChangeTextByField(evt.target.value, "password")}
+                    />
+
+                    <S.PrimaryButton title="Login" fullWidth onClick={onLogin} />
+                </S.Form>
+            </S.LoginContainer>
+        </S.Wrapper>
     );
 };
 
