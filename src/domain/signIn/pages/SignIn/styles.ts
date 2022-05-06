@@ -3,8 +3,8 @@ import styled from "styled-components";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
-import { Button } from "../../../../core/components/Button";
-import { InputText } from "../../../../core/components/InputText";
+import { Button } from "~/core/components/Button";
+import { InputText } from "~/core/components/InputText";
 
 export const Wrapper = styled(Grid).attrs({
     container: true,

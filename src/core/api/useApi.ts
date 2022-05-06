@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { getStorageItem } from "../utils/storage";
+import { getStorageItem } from "~/core/utils/storage";
 
 const api = axios.create({
     baseURL: import.meta.env.VITE_BASE_URL

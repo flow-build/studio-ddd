@@ -1,17 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-import flowbuildLogo from "../../assets/images/flowbuild-studio/default.svg";
-
-import { setStorageItem } from "../../../../core/utils/storage";
-
-import useLogin from "../../hooks/useLogin";
+import flowbuildLogo from "~/domain/signIn/assets/images/flowbuild-studio/default.svg";
+import useLogin from "~/domain/signIn/hooks/useLogin";
 
 import * as S from "./styles";
 
 const SignIn = () => {
-    const navigate = useNavigate();
-
     const login = useLogin();
 
     const [payload, setPayload] = useState({ email: "", password: "" });
@@ -20,13 +14,8 @@ const SignIn = () => {
         setPayload(prev => ({ ...prev, [field]: text }));
     };
 
-    const onLogin = async () => {
-        const token = await login.mutateAsync();
-
-        if (token) {
-            setStorageItem("TOKEN", token);
-            navigate("/dashboard");
-        }
+    const onLogin = () => {
+        login.mutate();
     };
 
     return (

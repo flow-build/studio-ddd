@@ -1,2 +1,2 @@
-export { default as routes } from "./config/routes";
-export * as types from "./config/types";
+export { default as routes } from "~/domain/signIn/config/routes";
+export * as types from "~/domain/signIn/config/types";
