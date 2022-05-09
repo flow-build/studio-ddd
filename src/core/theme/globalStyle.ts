@@ -1,6 +1,6 @@
-import { createGlobalStyle } from "styled-components";
+import { css } from '@emotion/react'
 
-export default createGlobalStyle`
+export default css`
   
   * {
     margin: 0;
@@ -9,7 +9,7 @@ export default createGlobalStyle`
   }
 
   html, body, #root {
-    max-height: 100vh; /* 100% do tamanho da tela */
+    max-height: 100vh; /* TODO: Verificar se vai ser responsivo */
     max-width: 100vw;
     height: 100%;
     width: 100%;
