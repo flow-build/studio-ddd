@@ -31,7 +31,13 @@
         "downlevelIteration": true,
         "types": [
             "react-query"
-        ]
+        ],
+        "baseUrl": "src",
+        "paths": {
+            "~/*": [
+                "./*"
+            ]
+        }
     },
     "include": [
         "src"

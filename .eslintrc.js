@@ -12,7 +12,7 @@ module.exports = {
         ecmaVersion: "latest",
         sourceType: "module",
     },
-    plugins: ["react", "@typescript-eslint"],
+    plugins: ["react", "@typescript-eslint", "eslint-plugin-import-helpers"],
     rules: {
         indent: ["error", 4],
         "linebreak-style": ["error", "unix"],
@@ -21,5 +21,26 @@ module.exports = {
         "react/jsx-uses-react": "off",
         "react/react-in-jsx-scope": "off",
         indent: ["error", 4, { SwitchCase: 1 }],
+        "react/prop-types": "off",
+        'import-helpers/order-imports': [
+            'warn',
+            {
+                newlinesBetween: 'always',
+                groups: [
+                    '/^react/',
+                    'module',
+                    '/^@mui/',
+                    '/^@reduxjs/',
+                    '/^react-redux/',
+                    '/^lodash/',
+                    '/^~/core/',
+                    '/^~/domain/',
+                    '/^~//',
+                    '/^./styles/',
+                    ['parent', 'sibling', 'index'],
+                ],
+                alphabetize: { order: 'asc', ignoreCase: true },
+            },
+        ],
     },
 };

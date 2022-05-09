@@ -1,5 +1,5 @@
 // TYPES
-const SET_COUNTER = "example/SET_COUNTER";
+const SET_COUNTER = "signIn/SET_COUNTER";
 
 export type State = {
     counter: number;

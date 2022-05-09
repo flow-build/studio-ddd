@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom";
-import Button from "../components/Button";
-import { render } from "../utils/test-utils";
+
+import Button from "~/domain/signIn/components/Button";
+import { render } from "~/domain/signIn/utils/test-utils";
 
 describe("[Button]", () => {
     test("Renders without crash", () => {
