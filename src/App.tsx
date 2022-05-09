@@ -3,10 +3,10 @@ import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Provider as ReduxProvider } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import {Global} from '@emotion/react'
+
+import { Global } from "@emotion/react";
 
 import { ThemeProvider } from "@mui/material/styles";
-
 
 import { queryClient } from "~/core/config/queryClient";
 import { darkTheme } from "~/core/theme/darkTheme";
@@ -15,7 +15,6 @@ import globalStyle from "~/core/theme/globalStyle";
 import { routes as SignInRoutes } from "~/domain/signIn";
 
 import { store } from "~/store";
-
 
 function App() {
     return (
