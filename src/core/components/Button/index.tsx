@@ -8,7 +8,7 @@ type Props = ButtonProps & {
 
     variant?: "contained" | "outlined" | "text";
 
-    onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+    onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export const Button: React.FC<Props> = ({ title, variant = "contained", ...props }) => {
