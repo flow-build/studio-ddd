@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { styled } from '@mui/material/styles';
@@ -32,7 +33,9 @@ export const Dashboard: React.FC = () => {
 
             <Content padding={2}>
                 <DrawerHeader />
-                <Outlet />
+                <Suspense fallback={<div>loading teste...</div>}>
+                    <Outlet />
+                </Suspense>
             </Content>
         </S.Wrapper>
     )
