@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 
 import useApi from "~/core/api/useApi";
@@ -6,6 +6,7 @@ import { setStorageItem } from "~/core/utils/storage";
 
 const useLogin = () => {
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
     const api = useApi();
 
     return useMutation<string>(
@@ -19,13 +20,14 @@ const useLogin = () => {
             }
         },
         {
-            onSuccess: (token) => {
+            onSuccess: token => {
                 if (token) {
                     setStorageItem("TOKEN", token);
+                    queryClient.invalidateQueries();
                     navigate("/dashboard");
                 }
-            }
-        }
+            },
+        },
     );
 };
 
