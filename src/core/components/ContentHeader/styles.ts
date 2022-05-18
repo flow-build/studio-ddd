@@ -6,14 +6,15 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
-import { ViewList, ViewModule } from '@mui/icons-material'
+import ViewList from '@mui/icons-material/ViewList'
+import ViewModule from '@mui/icons-material/ViewModule'
 
 import { Button as SharedButton } from '~/core/components/Button'
 
 export const Wrapper = styled(Grid)``
 Wrapper.defaultProps = {
-    item: true,
-    xs: 12
+  item: true,
+  xs: 12
 };
 
 export const Row = styled(Grid)`
@@ -22,8 +23,8 @@ export const Row = styled(Grid)`
   justify-content: space-between;
 `;
 Row.defaultProps = {
-    item: true,
-    xs: 12
+  item: true,
+  xs: 12
 }
 
 export const InfoContent = styled.div`
@@ -33,30 +34,28 @@ export const InfoContent = styled.div`
 
 export const Title = styled(Typography)``;
 Title.defaultProps = {
-    variant: 'h4',
-    // component: 'h4',
-    gutterBottom: true
+  variant: 'h4',
+  gutterBottom: true
 };
 
 export const Subtitle = styled(Typography)``;
 Subtitle.defaultProps = {
-    variant: 'caption',
-    // component: 'h5',
-    gutterBottom: true
+  variant: 'caption',
+  gutterBottom: true
 };
 
 export const Button = styled(SharedButton)``;
 
 export const Input = styled(TextField)``
 Input.defaultProps = {
-    size: 'small'
+  size: 'small'
 };
 
 export const ToggleContainer = styled(ToggleButtonGroup)`
   margin-left: auto;
 `
 ToggleContainer.defaultProps = {
-    exclusive: true
+  exclusive: true
 };
 
 export const Toggle = styled(ToggleButton)``

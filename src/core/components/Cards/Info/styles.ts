@@ -32,8 +32,7 @@ Actions.defaultProps = {
 
 export const Title = styled(Typography)``
 Title.defaultProps = {
-    variant: "h5",
-    // component: "h5"
+    variant: "h5"
 };
 
 export const Description = styled(Typography)``

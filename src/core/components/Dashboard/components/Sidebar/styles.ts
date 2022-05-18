@@ -15,9 +15,6 @@ Wrapper.defaultProps = {
 };
 
 export const NavList = styled(List)``
-NavList.defaultProps = {
-    // component: 'nav',
-};
 
 export const MenuItem = styled(ListItemButton)``
 
