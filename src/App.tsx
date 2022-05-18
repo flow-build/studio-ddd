@@ -3,6 +3,7 @@ import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Provider as ReduxProvider } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+import { SnackbarProvider } from 'notistack';
 import { Global } from '@emotion/react'
 
 import { ThemeProvider } from "@mui/material/styles";
@@ -27,12 +28,14 @@ function App() {
                     <Global styles={globalStyle} />
 
                     <Suspense fallback={<div>loading...</div>}>
-                        <Routes>
-                            <Route path="/" element={<SignInRoutes />} />
-                            <Route path="dashboard" element={<Dashboard />}>
-                                <Route path="workflows" element={<WorkflowsRoutes />} />
-                            </Route>
-                        </Routes>
+                        <SnackbarProvider maxSnack={3}>
+                            <Routes>
+                                <Route path="/" element={<SignInRoutes />} />
+                                <Route path="dashboard" element={<Dashboard />}>
+                                    <Route path="workflows" element={<WorkflowsRoutes />} />
+                                </Route>
+                            </Routes>
+                        </SnackbarProvider>
                     </Suspense>
                 </ThemeProvider>
 
