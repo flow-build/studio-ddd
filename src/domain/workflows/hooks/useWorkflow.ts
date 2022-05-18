@@ -27,7 +27,6 @@ const useWorkflow = ({ search }: { search: string }) => {
         try {
             const response = await api.get<IWorkflow[]>('/workflows')
 
-            console.log({ returnSearch: search })
             if (_isEmpty(search)) {
                 return response.data ?? [];
             }
