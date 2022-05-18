@@ -40,7 +40,7 @@ const useTable = (workflows: IWorkflow[]) => {
                 {
                     icon: AddOutlined,
                     tooltip: 'Novo processo',
-                    onClick: () => workflowPage.createProcess(workflow.name, workflow.workflow_id)
+                    onClick: () => workflowPage.createProcess(workflow.name)
                 },
                 {
                     icon: ExtensionOutlined,

@@ -1,34 +1,31 @@
 import { useCallback } from "react"
-import { useQuery } from "react-query"
 import { useNavigate } from 'react-router-dom'
+import { useSnackbar } from 'notistack';
 
-import useApi from "~/core/api/useApi"
-import { IWorkflow } from "~/core/models/IWorkflow"
-// import { useSnackbar } from 'notistack';
-// import { createProcessByName } from "services/resources/processes/create-by-name";
+import useProcess from "~/core/hooks/process/useProcess"
 
 const useWorkflowPage = () => {
     const navigate = useNavigate()
-    const api = useApi()
 
-    // const { enqueueSnackbar } = useSnackbar();
+    const process = useProcess()
+
+    const { enqueueSnackbar } = useSnackbar();
 
     const navigateToProcess = useCallback((workflowId: string) => {
         navigate(`${workflowId}/processes`)
     }, [navigate])
 
     const showNotification = useCallback((message: string) => {
-        /* enqueueSnackbar(
+        enqueueSnackbar(
             `Processo ${message} criado!`,
             { autoHideDuration: 2000, variant: 'success' }
-        ); */
-    }, [/* enqueueSnackbar */])
+        );
+    }, [enqueueSnackbar])
 
-    const createProcess = useCallback(async (processName: string, workflowId: string) => {
+    const createProcess = useCallback(async (processName: string) => {
         try {
-            /*  const response = await createProcessByName(processName);
-             showNotification(processName);
-             navigate(`${workflowId}/processes/${response.process_id}/history`) */
+            await process.createByName.mutateAsync(processName)
+            showNotification(processName);
         } catch (error) {
             console.error(error)
         }
