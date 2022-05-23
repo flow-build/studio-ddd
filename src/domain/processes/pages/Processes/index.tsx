@@ -1,23 +1,60 @@
-import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
-import Button from "../../components/Button";
-import { setCounter } from "../../ducks/processes";
-import { RootState } from "../../ducks";
+import _isEqual from 'lodash/isEqual'
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+import { ContentHeader } from '~/core/components/ContentHeader';
+import { ModeView } from '~/core/constants/ModeView';
+import useProcess from '~/core/hooks/process/useProcess';
+import useWorkflow from '~/core/hooks/workflow/useWorkflow';
+import { useTable } from '../../hooks';
+
+import { default as CardsView } from '~/domain/processes/components/CardsView'
+
+import * as S from './styles'
 
 const Processes = () => {
-    const dispatch = useDispatch();
-    const counter = useSelector((store: RootState) => store.processes.counter);
-    const [stateCounter, setStateCounter] = useState(counter);
+    const { workflowId } = useParams()
+
+    const process = useProcess()
+    const {
+        data: processes,
+        isLoading: isProcessLoading
+    } = process.listByWorkflowId({ id: workflowId ?? '' })
+
+    const workflow = useWorkflow()
+    const {
+        data: workflowInfo,
+        isLoading: isWorkflowLoading
+    } = workflow.getInfo({ id: workflowId ?? '' })
+
+    const [modeView, setModeView] = useState(ModeView.LIST)
+
+    const table = useTable(processes ?? [])
+
+    if (isProcessLoading || isWorkflowLoading) {
+        return null;
+    }
 
     return (
-        <div>
-            <h1>Processes</h1>
-            <h2>State counter - {stateCounter}</h2>
-            <h2>Redux counter - {counter}</h2>
-            <Button onClick={() => setStateCounter(actualValue => actualValue + 1)}>ADD +</Button>
-            <Button onClick={() => dispatch(setCounter(stateCounter))}>Push to redux</Button>
-        </div>
-    );
+        <S.Wrapper>
+            <ContentHeader
+                title={`Workflow - ${workflowInfo?.name}`}
+                subtitle={`Workflow id: ${workflowInfo?.workflow_id}`}
+                hasInput={false}
+                hasButton={false}
+                initialModeView={ModeView.LIST}
+                onChangeModeView={setModeView}
+            />
+
+            {_isEqual(modeView, ModeView.CARDS) && <CardsView processes={processes ?? []} />}
+
+            {_isEqual(modeView, ModeView.LIST) && (
+                <S.TableContainer>
+                    <S.Table columnData={table.columnData} rows={table.rows} />
+                </S.TableContainer>
+            )}
+        </S.Wrapper>
+    )
 };
 
 export default Processes;
