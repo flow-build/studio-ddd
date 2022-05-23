@@ -1,0 +1,1 @@
+export const HISTORY_CONST = "HISTORY_CONST";
