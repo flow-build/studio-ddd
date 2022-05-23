@@ -7,6 +7,7 @@ import { Dashboard } from "~/core/components/Dashboard";
 import AppProviders from "~/core/providers";
 import globalStyle from "~/core/theme/globalStyle";
 
+import { routes as ProcessesRoutes } from "~/domain/processes";
 import { routes as SignInRoutes } from "~/domain/signIn";
 import { routes as WorkflowsRoutes } from "~/domain/workflows";
 
@@ -20,6 +21,7 @@ function App() {
                     <Route path="/*" element={<SignInRoutes />} />
                     <Route path="dashboard" element={<Dashboard />}>
                         <Route path="workflows" element={<WorkflowsRoutes />} />
+                        <Route path="workflows/:workflowId/processes" element={<ProcessesRoutes />} />
                     </Route>
                 </Routes>
             </Suspense>
