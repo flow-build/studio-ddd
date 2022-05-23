@@ -20,9 +20,8 @@ function App() {
                 <Routes>
                     <Route path="/*" element={<SignInRoutes />} />
                     <Route path="dashboard" element={<Dashboard />}>
-                        <Route path="workflows" element={<WorkflowsRoutes />}>
-                            <Route path=":workflowId/processes" element={<ProcessesRoutes />} />
-                        </Route>
+                        <Route path="workflows" element={<WorkflowsRoutes />} />
+                        <Route path="workflows/:workflowId/processes" element={<ProcessesRoutes />} />
                     </Route>
                 </Routes>
             </Suspense>
