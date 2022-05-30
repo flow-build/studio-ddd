@@ -1,22 +1,34 @@
-import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
-import Button from "../../components/Button";
-import { setCounter } from "../../ducks/history";
-import { RootState } from "../../ducks";
+import { useParams } from 'react-router-dom';
+
+import { ContentHeader } from '~/core/components/ContentHeader'
+import useHistory from '~/core/hooks/history/useHistory';
+
+import { useTable } from '~/domain/history/hooks'
+
+import * as S from './styles'
 
 const History = () => {
-    const dispatch = useDispatch();
-    const counter = useSelector((store: RootState) => store.history.counter);
-    const [stateCounter, setStateCounter] = useState(counter);
+    const { process_id } = useParams();
+
+    const history = useHistory()
+    const { data: historyList } = history.getByProcessId({ processId: process_id ?? '' })
+
+    const table = useTable(historyList ?? [])
 
     return (
-        <div>
-            <h1>History</h1>
-            <h2>State counter - {stateCounter}</h2>
-            <h2>Redux counter - {counter}</h2>
-            <Button onClick={() => setStateCounter(actualValue => actualValue + 1)}>ADD +</Button>
-            <Button onClick={() => dispatch(setCounter(stateCounter))}>Push to redux</Button>
-        </div>
+        <S.Wrapper>
+            <ContentHeader
+                title='Histórico'
+                subtitle={`Process id: ${process_id ?? 'nenhum informado'}`}
+                hasInput={false}
+                hasButton={false}
+                showToggle={false}
+            />
+
+            <S.TableContainer>
+                <S.Table columnData={table.columnData} rows={table.rows.reverse()} isCollapse />
+            </S.TableContainer>
+        </S.Wrapper>
     );
 };
 
